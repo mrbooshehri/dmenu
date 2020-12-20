@@ -12,15 +12,9 @@ readxresources(void)
 		XrmValue xval;
 
 		if (XrmGetResource(xdb, "dmenu.font", "*", &type, &xval))
-			#if PANGO_PATCH
-			strcpy(font, xval.addr);
-			#else
 			fonts[0] = strdup(xval.addr);
-			#endif // PANGO_PATCH
-		#if !PANGO_PATCH
 		else
 			fonts[0] = strdup(fonts[0]);
-		#endif // PANGO_PATCH
 		if (XrmGetResource(xdb, "dmenu.background", "*", &type, &xval))
 			colors[SchemeNorm][ColBg] = strdup(xval.addr);
 		else
@@ -45,7 +39,6 @@ readxresources(void)
 			colors[SchemeOut][ColFg] = strdup(xval.addr);
 		else
 			colors[SchemeOut][ColFg] = strdup(colors[SchemeOut][ColFg]);
-		#if FUZZYHIGHLIGHT_PATCH
 		if (XrmGetResource(xdb, "dmenu.selhlbackground", "*", &type, &xval))
 			colors[SchemeSelHighlight][ColBg] = strdup(xval.addr);
 		else
@@ -62,7 +55,6 @@ readxresources(void)
 			colors[SchemeNormHighlight][ColFg] = strdup(xval.addr);
 		else
 			colors[SchemeNormHighlight][ColFg] = strdup(colors[SchemeNormHighlight][ColFg]);
-		#endif // FUZZYHIGHLIGHT_PATCH
 
 		XrmDestroyDatabase(xdb);
 	}
