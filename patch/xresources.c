@@ -39,6 +39,14 @@ readxresources(void)
 			colors[SchemeOut][ColFg] = strdup(xval.addr);
 		else
 			colors[SchemeOut][ColFg] = strdup(colors[SchemeOut][ColFg]);
+		if (XrmGetResource(xdb, "foreground", "*", &type, &xval))
+			colors[SchemeMid][ColBg] = strdup(xval.addr);
+		else
+			colors[SchemeMid][ColBg] = strdup(colors[SchemeOut][ColBg]);
+		if (XrmGetResource(xdb, "background", "*", &type, &xval))
+			colors[SchemeMid][ColFg] = strdup(xval.addr);
+		else
+			colors[SchemeMid][ColFg] = strdup(colors[SchemeOut][ColFg]);
 		if (XrmGetResource(xdb, "color7", "*", &type, &xval))
 			colors[SchemeSelHighlight][ColBg] = strdup(xval.addr);
 		else
