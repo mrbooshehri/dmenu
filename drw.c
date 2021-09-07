@@ -423,3 +423,4 @@ drw_cur_free(Drw *drw, Cur *cursor)
 	free(cursor);
 }
 
+#include "patch/scroll.c"

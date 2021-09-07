@@ -1,23 +1,25 @@
 static void
-drawhighlights(struct item *item, int x, int y, int maxw)
+drawhighlights(struct item *item, char *output, int x, int y, int maxw)
 {
 	int i, indent;
 	char *highlight;
 	char c;
 
-	if (!(strlen(item->text) && strlen(text)))
+	char *itemtext = output;
+
+	if (!(strlen(itemtext) && strlen(text)))
 		return;
 
 	drw_setscheme(drw, scheme[item == sel
 	                   ? SchemeSelHighlight
 	                   : SchemeNormHighlight]);
-	for (i = 0, highlight = item->text; *highlight && text[i];) {
+	for (i = 0, highlight = itemtext; *highlight && text[i];) {
 		if (!fstrncmp(&(*highlight), &text[i], 1))
 		{
 			/* get indentation */
 			c = *highlight;
 			*highlight = '\0';
-			indent = TEXTW(item->text);
+			indent = TEXTW(itemtext);
 			*highlight = c;
 
 			/* highlight character */
